@@ -26,14 +26,14 @@ module.exports = function(schedule, cfg) {
 
                 var serverQueries = [];
 
-                var loginPacket = "00 00 00 00 00 00 01 00 e1 a3 f1 08 00 00 00 00 34 00 00 00 04 00 31 38 30 32 00 00 28 00 00 00 01 00 00 00 00 00 00 00 c0 42 a4 58 11 00 75 73 65 72 6e 61 6d 65 3a 70 61 73 73 77 6f 72 64 00 00 00 00 00 00 00 00 00"
+                var loginPacketHex = '"00 00 00 00 00 00 01 00 e1 a3 f1 08 00 00 00 00 34 00 00 00 04 00 31 38 30 32 00 00 28 00 00 00 01 00 00 00 00 00 00 00 c0 42 a4 58 11 00 75 73 65 72 6e 61 6d 65 3a 70 61 73 73 77 6f 72 64 00 00 00 00 00 00 00 00 00"';
 
                 results.result.forEach(function(server) {
 
                     // Local path:
                     // /Applications/PacketSender.app/Contents/MacOS/PacketSender
-                    
-                    var cmd = 'packetsender -uxw 500 ' + server.address + ' ' + server.port + ' ' + loginPacket;
+
+                    var cmd = 'packetsender -uxw 500 ' + server.address + ' ' + server.port + ' ' + loginPacketHex;
 
                     var child = exec(cmd);
                     var childPromise = promiseFromChildProcess(child);
