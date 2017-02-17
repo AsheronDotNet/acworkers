@@ -16,4 +16,8 @@ jobs.push(schedule.scheduleJob('* * * * *', function() {
     workers['acservers'].run();
 }));
 
+jobs.push(schedule.scheduleJob('* */12 * * *', function() {
+    workers['serverlist'].run();
+}));
+
 console.log(jobs);

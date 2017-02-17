@@ -9,10 +9,12 @@ function promiseFromChildProcess(child) {
     });
 }
 
+// Check server list
+// https://raw.githubusercontent.com/cmoski/pac_launcher_config/master/servers_v2.xml
+
 module.exports = function(schedule, cfg) {
     return {
         run: function() {
-
             var servers = request({
                 uri: 'http://api.asheronsdb.com/servers',
                 method: 'GET'
@@ -62,11 +64,26 @@ module.exports = function(schedule, cfg) {
                                 uri: 'http://api.asheronsdb.com/servers/' + server.id,
                                 method: 'PUT',
                                 json: jsonPayload
+                            }).catch(function(error) {
+
+                                console.log('Could not update server API')
+                                console.log(error);
+
                             });
                         }
 
+                    }).catch(function(error) {
+
+                        console.log('Could not get server status over UDP')
+                        console.log(error);
+
                     });
                 });
+            }).catch(function(error) {
+
+                console.log('Could not fetch server list from API')
+                console.log(error);
+
             });
         }
     };

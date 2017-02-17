@@ -116,6 +116,11 @@ module.exports = function(schedule, cfg) {
                 }).catch(function(e) {
                     console.log(e);
                 });
+            }).catch(function(error) {
+
+                console.log('Could not fetch subreddit json')
+                console.log(error);
+
             });
 
         }
