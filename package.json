@@ -1,0 +1,20 @@
+{
+  "name": "acworkers",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node jobs.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "discord.js": "^11.0.0",
+    "jsonfile": "^2.4.0",
+    "node-schedule": "^1.2.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "underscore": "^1.8.3"
+  }
+}
