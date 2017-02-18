@@ -15,7 +15,7 @@ jobs.push(schedule.scheduleJob('* * * * *', function() {
     workers['reddit'].run();
 }));
 
-jobs.push(schedule.scheduleJob('*/10 * * * *', function() {
+jobs.push(schedule.scheduleJob('*/5 * * * *', function() {
     workers['acservers'].run();
 }));
 
