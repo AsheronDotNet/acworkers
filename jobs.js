@@ -13,11 +13,16 @@ console.log(workers);
 
 jobs.push(schedule.scheduleJob('* * * * *', function() {
     workers['reddit'].run();
+}));
+
+jobs.push(schedule.scheduleJob('*/10 * * * *', function() {
     workers['acservers'].run();
 }));
 
-jobs.push(schedule.scheduleJob('* */12 * * *', function() {
+jobs.push(schedule.scheduleJob('* */1 * * *', function() {
     workers['serverlist'].run();
 }));
+
+
 
 console.log(jobs);
