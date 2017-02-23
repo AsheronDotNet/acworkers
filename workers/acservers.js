@@ -16,7 +16,7 @@ module.exports = function(schedule, cfg) {
     return {
         run: function() {
             var servers = request({
-                uri: 'http://api.asheronsdb.com/servers',
+                uri: 'http://api.asheron.net/servers',
                 method: 'GET'
             });
 
@@ -61,7 +61,7 @@ module.exports = function(schedule, cfg) {
 
                         if (jsonPayload.online !== server.online) {
                             request({
-                                uri: 'http://api.asheronsdb.com/servers/' + server.id,
+                                uri: 'http://api.asheron.net/servers/' + server.id,
                                 method: 'PUT',
                                 json: jsonPayload
                             }).catch(function(error) {
