@@ -46,9 +46,7 @@ module.exports = function(schedule, cfg) {
                         console.log(status);
                         console.log('---------------------------------------');
 
-                        var jsonPayload = {
-                            api_key: cfg.acAPIKey
-                        };
+                        var jsonPayload = {}
 
                         if (status.indexOf('Response') !== -1) {
                             jsonPayload.online = true;
@@ -63,7 +61,10 @@ module.exports = function(schedule, cfg) {
                             request({
                                 uri: 'http://api.asheron.net/servers/' + server.id,
                                 method: 'PUT',
-                                json: jsonPayload
+                                json: jsonPayload,
+                                headers: {
+                                    'Authorization': 'Bearer ' + cfg.acAPIKey
+                                }
                             }).catch(function(error) {
 
                                 console.log('Could not update server API')
