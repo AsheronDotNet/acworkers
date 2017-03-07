@@ -8,7 +8,7 @@ module.exports = function(schedule, cfg) {
     return {
         run: function() {
 
-            var webhook = new Discord.WebhookClient(cfg.webhooks.reddit.id, cfg.webhooks.reddit.token);
+            var webhook = new Discord.WebhookClient(process.env.REDDIT_WEBHOOK_ID, process.env.REDDIT_WEBHOOK_TOKEN);
             var timestamp = 'data/timestamp.json';
 
             console.log('STATUS: Reddit scheduled job fired')
