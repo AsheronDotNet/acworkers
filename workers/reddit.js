@@ -3,7 +3,7 @@ var jsonfile = require('jsonfile');
 var request = require('request-promise');
 var _ = require('underscore');
 
-module.exports = function(schedule, cfg) {
+module.exports = function(schedule) {
 
     return {
         run: function() {

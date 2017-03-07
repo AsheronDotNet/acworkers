@@ -5,7 +5,7 @@ var workers = {};
 var jobs = [];
 
 fs.readdirSync('./workers/').forEach(file => {
-    workers[file.slice(0,-3)] = require('./workers/' + file)(schedule, cfg);
+    workers[file.slice(0,-3)] = require('./workers/' + file)(schedule);
 });
 
 console.log(workers);

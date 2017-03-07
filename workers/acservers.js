@@ -12,7 +12,7 @@ function promiseFromChildProcess(child) {
 // Check server list
 // https://raw.githubusercontent.com/cmoski/pac_launcher_config/master/servers_v2.xml
 
-module.exports = function(schedule, cfg) {
+module.exports = function(schedule) {
     return {
         run: function() {
             var servers = request({

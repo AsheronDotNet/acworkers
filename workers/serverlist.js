@@ -43,7 +43,7 @@ var util = require('util');
 //
 
 
-module.exports = function(schedule, cfg) {
+module.exports = function(schedule) {
 
     return {
         run: function() {
