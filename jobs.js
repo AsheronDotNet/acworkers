@@ -1,6 +1,5 @@
 var fs = require('fs');
 var schedule = require('node-schedule');
-var cfg = require('./config.js');
 
 var workers = {};
 var jobs = [];
