@@ -11,7 +11,6 @@ RUN qmake
 RUN make
 RUN chmod a+x PacketSender
 RUN cp PacketSender /usr/local/bin/packetsender
-RUN
 WORKDIR /var/script/
 COPY package.json /var/script/
 RUN npm install --only=production
