@@ -1,15 +1,36 @@
 var Discord = require('discord.js');
 var jsonfile = require('jsonfile');
+var async = require('asyncawait/async');
+var await = require('asyncawait/await');
 var request = require('request-promise');
 var _ = require('underscore');
+const mongoose = require('mongoose');
+
+var database = require('../config/database');
+mongoose.connect(database.url);
+
+const Timestamp = require('../models/Timestamp');
+
 
 module.exports = function(schedule) {
 
     return {
-        run: function() {
+        run: async(function() {
 
             var webhook = new Discord.WebhookClient(process.env.REDDIT_WEBHOOK_ID, process.env.REDDIT_WEBHOOK_TOKEN);
-            var timestamp = 'data/timestamp.json';
+            //var timestamp = 'data/timestamp.json';
+
+            var timestampID = process.env.REDDIT_TIMESTAMP_ID;
+
+            var query = Timestamp.findById(timestampID);
+            var results = await (query.exec());
+
+            var lastTimestamp = results.timestamp;
+
+            console.log(results);
+
+
+
 
             console.log('STATUS: Reddit scheduled job fired')
 
@@ -28,7 +49,8 @@ module.exports = function(schedule) {
                 console.log('STATUS: All subreddits fetched');
 
                 var now = ((new Date).getTime() / 1000);
-                var lastTimestamp = jsonfile.readFileSync(timestamp).timestamp;
+
+                    console.log(now, 'Now timestamp');
                 var newPosts = [];
 
                 subreddits.forEach(function(subreddit, index) {
@@ -105,13 +127,23 @@ module.exports = function(schedule) {
 
                     console.log('STATUS: All messages sent');
 
-                    var obj = {
-                        timestamp: now
-                    }
 
-                    jsonfile.writeFileSync(timestamp, obj);
 
-                    console.log('STATUS: Timestamp updated');
+                    var query = Timestamp.findOneAndUpdate({
+                            _id: timestampID
+                        }, {
+                            timestamp: now
+                        }, {
+                            upsert: true
+                        });
+
+                    var results = await (query.exec());
+
+                    console.log(results);
+
+                    //jsonfile.writeFileSync(timestamp, obj);
+
+
 
                 }).catch(function(e) {
                     console.log(e);
@@ -123,7 +155,7 @@ module.exports = function(schedule) {
 
             });
 
-        }
+        })
     }
 
 
